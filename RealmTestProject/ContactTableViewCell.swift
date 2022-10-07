@@ -25,7 +25,7 @@ class ContactTableViewCell: UITableViewCell {
     }
     
     func setupWith(contact: Contact) {
-        let ageString = contact.age.isEmpty ? "" : "age: \(contact.age) years"
+        let ageString = contact.age == nil ? "" : "age: \(contact.age!) years"
         userNameLabel.text = "Name: \(contact.fullName), \(ageString) "
         phoneNumberLabel.text = "Phone: \(contact.phone)"
         

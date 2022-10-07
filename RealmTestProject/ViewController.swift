@@ -58,8 +58,17 @@ class ViewController: UIViewController {
     
     private func configRealm() {
         let config = Realm.Configuration(
-            schemaVersion: 3
-        )
+            schemaVersion: 4) { migration, oldSchemaVersion in
+                if oldSchemaVersion < 2 {
+                    migration.renameProperty(onType: Contact.className(), from: "name", to: "fullName")
+                }
+                if oldSchemaVersion < 4 {
+                    migration.enumerateObjects(ofType: Contact.className()) { oldObject, newObject in
+                        let oldAge = oldObject!["age"] as? String
+                        newObject!["age"] = Int(oldAge ?? "")
+                    }
+                }
+            }
         Realm.Configuration.defaultConfiguration = config
     }
     
@@ -93,7 +102,7 @@ class ViewController: UIViewController {
                 name: nameTextField?.text ?? "",
                 phone: phoneTextField?.text ?? "",
                 email: emailTextField?.text ?? "",
-                age: ageTextField?.text ?? ""
+                age: Int(ageTextField?.text ?? "")
             )
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -104,7 +113,7 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func addContact(name: String, phone: String, email: String, age: String) {
+    private func addContact(name: String, phone: String, email: String, age: Int?) {
         let contact = Contact.create(withName: name, phone: phone, email: email, age: age)
         
         do {

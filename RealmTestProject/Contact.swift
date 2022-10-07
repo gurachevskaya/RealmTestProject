@@ -8,17 +8,17 @@
 import Foundation
 import RealmSwift
 
-class Contact: Object {
-    @objc dynamic var fullName = ""
-    @objc dynamic var phone = ""
-    @objc dynamic var email = ""
-    @objc dynamic var age = ""
-
+final class Contact: Object {
+    @Persisted var fullName = ""
+    @Persisted var phone = ""
+    @Persisted var email = ""
+    @Persisted var age: Int?
+    
     static func create(
         withName name: String,
         phone: String,
         email: String,
-        age: String
+        age: Int?
     ) -> Contact {
         let contact = Contact()
         contact.fullName = name
