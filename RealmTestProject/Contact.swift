@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class Contact: Object {
-    @objc dynamic var name = ""
+    @objc dynamic var fullName = ""
     @objc dynamic var phone = ""
     @objc dynamic var email = ""
 
@@ -19,7 +19,7 @@ class Contact: Object {
         email: String
     ) -> Contact {
         let contact = Contact()
-        contact.name = name
+        contact.fullName = name
         contact.phone = phone
         contact.email = email
         

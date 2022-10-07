@@ -25,7 +25,7 @@ class ContactTableViewCell: UITableViewCell {
     }
     
     func setupWith(contact: Contact) {
-        userNameLabel.text = "Name: \(contact.name)"
+        userNameLabel.text = "Name: \(contact.fullName)"
         phoneNumberLabel.text = "Phone: \(contact.phone)"
         
         let email = contact.email.isEmpty ? "unknown" : contact.email

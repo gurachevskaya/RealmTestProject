@@ -58,8 +58,14 @@ class ViewController: UIViewController {
     
     private func configRealm() {
         let config = Realm.Configuration(
-            schemaVersion: 1)
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 2 {
+                    migration.renameProperty(onType: Contact.className(), from: "name", to: "fullName")
+                }
+            })
         Realm.Configuration.defaultConfiguration = config
+        
     }
     
     @objc
@@ -121,7 +127,7 @@ class ViewController: UIViewController {
         do {
             let realm = try Realm()
             let results = realm.objects(Contact.self)
-                .sorted(by: { $0.name < $1.name })
+                .sorted(by: { $0.fullName < $1.fullName })
             self.contacts = results
         } catch let error {
             print(error.localizedDescription)
