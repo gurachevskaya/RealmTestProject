@@ -25,12 +25,14 @@ class ViewController: UIViewController {
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: ContactTableViewCell.reuseID)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
+        configRealm()
         getContacts()
     }
     
@@ -54,6 +56,12 @@ class ViewController: UIViewController {
         ])
     }
     
+    private func configRealm() {
+        let config = Realm.Configuration(
+            schemaVersion: 1)
+        Realm.Configuration.defaultConfiguration = config
+    }
+    
     @objc
     private func addButtonTapped() {
         let alertController = UIAlertController(title: "Add New Contact", message: "", preferredStyle: .alert)
@@ -65,14 +73,20 @@ class ViewController: UIViewController {
             textField.placeholder = "Enter Phone number"
             textField.keyboardType = .phonePad
         }
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter Email"
+            textField.keyboardType = .emailAddress
+        }
         
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert in
             let nameTextField = alertController.textFields?[0]
             let phoneTextField = alertController.textFields?[1]
-            
+            let emailTextField = alertController.textFields?[2]
+
             self.addContact(
                 name: nameTextField?.text ?? "",
-                phone: phoneTextField?.text ?? ""
+                phone: phoneTextField?.text ?? "",
+                email: emailTextField?.text ?? ""
             )
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -83,8 +97,8 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func addContact(name: String, phone: String) {
-        let contact = Contact.create(withName: name, phone: phone)
+    private func addContact(name: String, phone: String, email: String) {
+        let contact = Contact.create(withName: name, phone: phone, email: email)
         
         do {
             let realm = try Realm()

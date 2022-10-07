@@ -13,7 +13,8 @@ class ContactTableViewCell: UITableViewCell {
 
     private let userNameLabel = UILabel()
     private let phoneNumberLabel = UILabel()
-    
+    private let emailLabel = UILabel()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -26,15 +27,20 @@ class ContactTableViewCell: UITableViewCell {
     func setupWith(contact: Contact) {
         userNameLabel.text = "Name: \(contact.name)"
         phoneNumberLabel.text = "Phone: \(contact.phone)"
+        
+        let email = contact.email.isEmpty ? "unknown" : contact.email
+        emailLabel.text = "Email: \(email)"
     }
     
     private func setupUI() {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-       
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
+
         contentView.addSubview(userNameLabel)
         contentView.addSubview(phoneNumberLabel)
-     
+        contentView.addSubview(emailLabel)
+
         NSLayoutConstraint.activate([
             userNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
             userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -43,7 +49,11 @@ class ContactTableViewCell: UITableViewCell {
             phoneNumberLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 10),
             phoneNumberLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
             phoneNumberLabel.trailingAnchor.constraint(equalTo: userNameLabel.trailingAnchor),
-            phoneNumberLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            emailLabel.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 10),
+            emailLabel.leadingAnchor.constraint(equalTo: phoneNumberLabel.leadingAnchor),
+            emailLabel.trailingAnchor.constraint(equalTo: phoneNumberLabel.trailingAnchor),
+            emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }
 }
