@@ -15,6 +15,8 @@
 		18069BE828DDF9BE004212AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18069BE628DDF9BE004212AA /* LaunchScreen.storyboard */; };
 		18069BF128DE030F004212AA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 18069BF028DE030F004212AA /* Realm */; };
 		18069BF328DE030F004212AA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18069BF228DE030F004212AA /* RealmSwift */; };
+		18069BF528DE0515004212AA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18069BF428DE0515004212AA /* Contact.swift */; };
+		18D49A3028F02D7C0022087D /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D49A2F28F02D7C0022087D /* ContactTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		18069BE428DDF9BE004212AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18069BE728DDF9BE004212AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18069BE928DDF9BE004212AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18069BF428DE0515004212AA /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		18D49A2F28F02D7C0022087D /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				18069BE428DDF9BE004212AA /* Assets.xcassets */,
 				18069BE628DDF9BE004212AA /* LaunchScreen.storyboard */,
 				18069BE928DDF9BE004212AA /* Info.plist */,
+				18069BF428DE0515004212AA /* Contact.swift */,
+				18D49A2F28F02D7C0022087D /* ContactTableViewCell.swift */,
 			);
 			path = RealmTestProject;
 			sourceTree = "<group>";
@@ -149,6 +155,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18069BF528DE0515004212AA /* Contact.swift in Sources */,
+				18D49A3028F02D7C0022087D /* ContactTableViewCell.swift in Sources */,
 				18069BE028DDF9BB004212AA /* ViewController.swift in Sources */,
 				18069BDC28DDF9BB004212AA /* AppDelegate.swift in Sources */,
 				18069BDE28DDF9BB004212AA /* SceneDelegate.swift in Sources */,
