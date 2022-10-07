@@ -58,14 +58,9 @@ class ViewController: UIViewController {
     
     private func configRealm() {
         let config = Realm.Configuration(
-            schemaVersion: 2,
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 2 {
-                    migration.renameProperty(onType: Contact.className(), from: "name", to: "fullName")
-                }
-            })
+            schemaVersion: 3
+        )
         Realm.Configuration.defaultConfiguration = config
-        
     }
     
     @objc
@@ -83,16 +78,22 @@ class ViewController: UIViewController {
             textField.placeholder = "Enter Email"
             textField.keyboardType = .emailAddress
         }
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter Age"
+            textField.keyboardType = .numberPad
+        }
         
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert in
             let nameTextField = alertController.textFields?[0]
             let phoneTextField = alertController.textFields?[1]
             let emailTextField = alertController.textFields?[2]
-
+            let ageTextField = alertController.textFields?[3]
+            
             self.addContact(
                 name: nameTextField?.text ?? "",
                 phone: phoneTextField?.text ?? "",
-                email: emailTextField?.text ?? ""
+                email: emailTextField?.text ?? "",
+                age: ageTextField?.text ?? ""
             )
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -103,8 +104,8 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func addContact(name: String, phone: String, email: String) {
-        let contact = Contact.create(withName: name, phone: phone, email: email)
+    private func addContact(name: String, phone: String, email: String, age: String) {
+        let contact = Contact.create(withName: name, phone: phone, email: email, age: age)
         
         do {
             let realm = try Realm()
