@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         do {
             let realm = try Realm()
             let results = realm.objects(Contact.self)
-                .sorted(by: { $0.name > $1.name })
+                .sorted(by: { $0.name < $1.name })
             self.contacts = results
         } catch let error {
             print(error.localizedDescription)
